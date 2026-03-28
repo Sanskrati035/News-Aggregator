@@ -60,3 +60,7 @@ Axios - For API requests
 
 React Router - For navigation
 
+👤 Author:
+Sanskrati
+
+GitHub: @Sanskrati035
