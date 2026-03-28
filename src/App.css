@@ -1,4 +1,3 @@
-/* --- Global Variables & Reset --- */
 :root {
   --primary: #2563eb;
   --dark-bg: #121212;
@@ -41,7 +40,6 @@ body.dark-mode .navbar {
 }
 
 /* --- Navbar Styles --- */
-/* --- Optimized Navbar CSS --- */
 .navbar {
   background: #ffffff;
   padding: 10px 0;
@@ -97,7 +95,7 @@ body.dark-mode .navbar {
   box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
 }
 
-/* Categories - Fixed Buttons */
+/* Categories - Buttons */
 .categories-scroll {
   display: flex;
   gap: 6px;
@@ -180,17 +178,16 @@ body.dark-mode .theme-btn { background: #2d2d2d; color: white; }
 body.dark-mode .categories-scroll button { background: #2d2d2d; border-color: #444; color: #ddd; }
 body.dark-mode .search-form input { color: white; }
 
-/* Responsive: Phone par menu hide na ho */
 @media (max-width: 1024px) {
-  .categories-scroll { display: none; } /* Mobile par categories hide kar rahe hain to save space */
+  .categories-scroll { display: none; } 
   .nav-content { padding: 0 10px; }
 }
 /* Search Form Container */
 .search-form {
   display: flex;
   align-items: center;
-  background: #f0f2f5; /* Light grey background */
-  border-radius: 50px; /* Pill shape */
+  background: #f0f2f5; 
+  border-radius: 50px; 
   padding: 2px 5px;
   border: 1px solid transparent;
   transition: var(--transition);
