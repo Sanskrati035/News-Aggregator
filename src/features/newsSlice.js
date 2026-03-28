@@ -1,4 +1,3 @@
-// newsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
@@ -25,7 +24,7 @@ const newsSlice = createSlice({
     currentCategory: 'general',
     currentSearch: '',
     bookmarks: [],
-    showBookmarks: false, // Page toggle karne ke liye
+    showBookmarks: false, 
     darkMode: false,
   },
   reducers: {
