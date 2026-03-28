@@ -6,7 +6,6 @@ const NewsList = () => {
   const { articles, status, bookmarks, currentPage, currentCategory, currentSearch, showBookmarks } = useSelector((state) => state.news);
   const dispatch = useDispatch();
 
-  // Agar Bookmarks page par hain, toh wahi dikhayein
   const displayArticles = showBookmarks ? bookmarks : articles;
 
   const handlePageChange = (newPage) => {
