@@ -9,12 +9,10 @@ function App() {
   const dispatch = useDispatch();
   const { darkMode } = useSelector((state) => state.news);
 
-  // Jab app load ho, tab news fetch karein
   useEffect(() => {
     dispatch(fetchNews({ category: 'general' }));
   }, [dispatch]);
 
-  // Dark Mode toggle karne ke liye body class update karein
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add('dark-mode');
