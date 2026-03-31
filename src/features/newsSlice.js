@@ -1,17 +1,31 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const API_KEY = '981e96abf86e4eeea5c63399629dd3e0'; 
+const API_KEY = import.meta.env.VITE_NEWS_API_KEY;
 
 export const fetchNews = createAsyncThunk(
   'news/fetchNews',
-  async ({ category = 'general', searchTerm = '', page = 1 }) => {
-    const endpoint = searchTerm ? 'everything' : 'top-headlines';
-    const query = searchTerm ? `q=${searchTerm}` : `country=us&category=${category}`;
-    const url = `https://newsapi.org/v2/${endpoint}?${query}&page=${page}&pageSize=12&apiKey=${API_KEY}`;
-    
-    const response = await axios.get(url);
-    return { data: response.data, page, category, searchTerm };
+  async ({ category = 'general', searchTerm = '', page = 1 }, { rejectWithValue }) => {
+    try {
+      const endpoint = searchTerm ? 'everything' : 'top-headlines';
+      
+      const query = searchTerm 
+        ? `q=${encodeURIComponent(searchTerm)}` 
+        : `country=us&category=${category}`;
+      
+      const url = `https://newsapi.org/v2/${endpoint}?${query}&page=${page}&pageSize=12&apiKey=${API_KEY}`;
+      
+      const response = await axios.get(url);
+      
+      return { 
+        articles: response.data.articles, 
+        page, 
+        category, 
+        searchTerm 
+      };
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -19,7 +33,8 @@ const newsSlice = createSlice({
   name: 'news',
   initialState: {
     articles: [],
-    status: 'idle',
+    status: 'idle', 
+    error: null,
     currentPage: 1,
     currentCategory: 'general',
     currentSearch: '',
@@ -28,7 +43,9 @@ const newsSlice = createSlice({
     darkMode: false,
   },
   reducers: {
-    toggleTheme: (state) => { state.darkMode = !state.darkMode; },
+    toggleTheme: (state) => { 
+      state.darkMode = !state.darkMode; 
+    },
     toggleBookmark: (state, action) => {
       const exists = state.bookmarks.find(a => a.url === action.payload.url);
       if (exists) {
@@ -43,15 +60,20 @@ const newsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchNews.pending, (state) => { state.status = 'loading'; })
+      .addCase(fetchNews.pending, (state) => { 
+        state.status = 'loading'; 
+      })
       .addCase(fetchNews.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.articles = action.payload.data.articles;
+        state.articles = action.payload.articles;
         state.currentPage = action.payload.page;
         state.currentCategory = action.payload.category;
         state.currentSearch = action.payload.searchTerm;
       })
-      .addCase(fetchNews.rejected, (state, action) => { state.status = 'failed'; });
+      .addCase(fetchNews.rejected, (state, action) => { 
+        state.status = 'failed'; 
+        state.error = action.payload?.message || "Something went wrong";
+      });
   },
 });
 
