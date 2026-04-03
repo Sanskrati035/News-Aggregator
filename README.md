@@ -1,10 +1,10 @@
-# 📰 News Aggregator - React & Redux
+#  News Aggregator - React & Redux
 
 A modern news application that fetches real-time headlines using the NewsAPI, featuring global state management and a seamless user experience.
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 * **Node.js** (v14.0 or higher)
@@ -32,7 +32,7 @@ A modern news application that fetches real-time headlines using the NewsAPI, fe
    ```
     npm start
 
-🛠 Features
+ Features
 
 -Redux-Powered Sync: All components stay in sync using Redux Toolkit.
 
@@ -48,7 +48,7 @@ A modern news application that fetches real-time headlines using the NewsAPI, fe
 
 -Error Handling: Graceful loading spinners and error alerts.
 
-🧱 Built With
+ Built With
 
 React 18 - UI Library
 
